@@ -27,8 +27,10 @@ async function getById(bookId) {
 async function remove(bookId) {
   try {
     const query = `DELETE FROM book WHERE book.id = ?`;
-    await dbService.runSqlEscape(query, [bookId]);
+    const okPacket = await dbService.runSqlEscape(query, [bookId]);
+    if (okPacket.affectedRows === 1) return bookId;
     return bookId;
+    throw new Error(`Book ${bookId} was not removed`);
   } catch (err) {
     logger.error(`cannot remove book ${bookId}`, err);
     throw err;
@@ -50,9 +52,9 @@ async function add({ title, price, genre, publication_date, author }) {
 async function update({ id, title, price, genre, publication_date, author }) {
   try {
     const query = `UPDATE book SET Title = ?, Price = ?, Genre = ?, Publication_date = ?, Author = ? WHERE book.id = ?`;
-    await dbService.runSqlEscape(query, [title, price, genre, publication_date, author, id]);
-    const updatedBook = { id, title, price, genre, publication_date, author }
-    return updatedBook
+    const okPacket = await dbService.runSqlEscape(query, [title, price, genre, publication_date, author, id]);
+    if (okPacket.affectedRows !== 0) return { id, title, price, genre, publication_date, author }
+    throw new Error(`Book ${id} was not updated`);
   } catch (err) {
     logger.error(`cannot update book ${id}`, err);
     throw err;
