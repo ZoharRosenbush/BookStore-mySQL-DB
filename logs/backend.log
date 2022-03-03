@@ -2,3 +2,4 @@
 3/3/2022, 3:38:53 PM - ERROR - Failed to connect SQL server | {"code":"ER_BAD_DB_ERROR","errno":1049,"sqlMessage":"Unknown database 'bug_db'","sqlState":"42000","fatal":true}
 3/3/2022, 3:40:04 PM - INFO - Server is running on port: 3030
 3/3/2022, 3:49:10 PM - INFO - Server is running on port: 3030
+3/3/2022, 4:09:00 PM - INFO - Server is running on port: 3030
