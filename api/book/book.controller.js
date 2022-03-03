@@ -8,55 +8,55 @@ async function getBooks(req, res) {
     res.json(books);
   } catch (err) {
     logger.error('Failed to get books', err);
-    res.status(500).send({err: 'Failed to get books'});
+    res.status(500).send({ err: 'Failed to get books' });
   }
 }
 
 // GET book BY ID
 async function getBookById(req, res) {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const book = await bookService.getById(id);
     res.json(book);
   } catch (err) {
     logger.error('Failed to get book', err);
-    res.status(500).send({err: 'Failed to get book'});
+    res.status(500).send({ err: 'Failed to get book' });
   }
 }
 
 // POST (add book)
 async function addBook(req, res) {
   try {
-    const {title, price ,genre} = req.body;
-    const addedBook = await bookService.add({title,price,genre,publication_date,author});
+    const bookToAdd = req.body;
+    const addedBook = await bookService.add(bookToAdd);
     res.json(addedBook);
   } catch (err) {
     logger.error('Failed to add book', err);
-    res.status(500).send({err: 'Failed to add book'});
+    res.status(500).send({ err: 'Failed to add book' });
   }
 }
 
 // PUT (Update book)
 async function updateBook(req, res) {
   try {
-    const {id, title, isPublic} = req.body;
-    const updatedBook = await bookService.update({id, title, isPublic});
+    const bookToUpdate = req.body;
+    const updatedBook = await bookService.update(bookToUpdate);
     res.json(updatedBook);
   } catch (err) {
     logger.error('Failed to update book', err);
-    res.status(500).send({err: 'Failed to update book'});
+    res.status(500).send({ err: 'Failed to update book' });
   }
 }
 
 // DELETE book
 async function remove(req, res) {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const removedId = await bookService.remove(id);
     res.send(removedId);
   } catch (err) {
     logger.error('Failed to remove book', err);
-    res.status(500).send({err: 'Failed to remove book'});
+    res.status(500).send({ err: 'Failed to remove book' });
   }
 }
 

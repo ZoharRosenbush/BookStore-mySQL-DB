@@ -36,8 +36,9 @@ async function remove(bookId) {
 
 async function add({ title, price, genre, publication_date, author }) {
   try {
-    const query = `INSERT INTO book (Title,Price,Genre,Publication_date,Author) VALUES (?,?,?)`;
-    const addedBook = await dbService.runSqlEscape(query, [title, price, genre, publication_date, author]);
+    const query = `INSERT INTO book (Title,Price,Genre,Publication_date,Author) VALUES (?,?,?,?,?)`;
+    const { insertId } = await dbService.runSqlEscape(query, [title, price, genre, publication_date, author]);
+    const addedBook = { id: insertId, title, price, genre, publication_date, author }
     return addedBook
   } catch (err) {
     logger.error('cannot insert book', err);
@@ -47,9 +48,10 @@ async function add({ title, price, genre, publication_date, author }) {
 
 async function update({ id, title, price, genre, publication_date, author }) {
   try {
-    const query = `UPDATE book SET  Title = ?, Price = ?, Genre = ? ,Publication_date = ? ,Author = ?, WHERE book.id = ?`;
+    const query = `UPDATE book SET Title = ?, Price = ?, Genre = ?, Publication_date = ?, Author = ? WHERE book.id = ?`;
     await dbService.runSqlEscape(query, [title, price, genre, publication_date, author, id]);
-    return { id, title, price, genre, publication_date, author };
+    const updatedBook = { id, title, price, genre, publication_date, author }
+    return updatedBook
   } catch (err) {
     logger.error(`cannot update book ${id}`, err);
     throw err;
