@@ -15,8 +15,9 @@ async function query() {
 async function getById(bookId) {
   try {
     const query = 'SELECT * FROM book WHERE book.id = ?';
-    const book = await dbService.runSqlEscape(query, [bookId]);
-    return book;
+    const books = await dbService.runSqlEscape(query, [bookId]);
+    if (books.length === 1) return books[0];
+    throw new Error(`book ${bookId} not found`);
   } catch (err) {
     logger.error(`while finding book: ${bookId}`, err);
     throw err;

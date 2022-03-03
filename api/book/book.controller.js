@@ -19,7 +19,7 @@ async function getBookById(req, res) {
     const book = await bookService.getById(id);
     res.json(book);
   } catch (err) {
-    logger.error('Failed to get book', err);
+    logger.error(`Failed to get book ${id}`, err);
     res.status(500).send({ err: 'Failed to get book' });
   }
 }

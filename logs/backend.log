@@ -17,3 +17,7 @@
 3/3/2022, 4:44:21 PM - ERROR - cannot update book 10 | {"code":"ER_PARSE_ERROR","errno":1064,"sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE book.id = 10' at line 1","sqlState":"42000","index":0,"sql":"UPDATE book SET  Title = 'Shirush', Price = 50, Genre = 'romance' ,Publication_date = '2020/12/03' ,Author = 2, WHERE book.id = 10"}
 3/3/2022, 4:44:21 PM - ERROR - Failed to update book | {"code":"ER_PARSE_ERROR","errno":1064,"sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE book.id = 10' at line 1","sqlState":"42000","index":0,"sql":"UPDATE book SET  Title = 'Shirush', Price = 50, Genre = 'romance' ,Publication_date = '2020/12/03' ,Author = 2, WHERE book.id = 10"}
 3/3/2022, 4:50:56 PM - INFO - Server is running on port: 3030
+3/3/2022, 4:58:32 PM - INFO - Server is running on port: 3030
+3/3/2022, 5:05:34 PM - INFO - Server is running on port: 3030
+3/3/2022, 5:05:36 PM - ERROR - while finding book: 12 | {}
+3/3/2022, 5:05:36 PM - ERROR - Failed to get book | {}
